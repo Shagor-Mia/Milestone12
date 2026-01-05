@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import CartButton from "../buttons/CartButton";
 
 export default function FoodCard({ food }) {
   //   console.log(food);
@@ -26,13 +27,8 @@ export default function FoodCard({ food }) {
         <p className="text-xl font-semibold text-emerald-600">৳ {price}</p>
 
         {/* Buttons */}
-        <div className="mt-auto flex gap-3">
-          <button
-            // onClick={onAddToCart}
-            className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-xl font-medium transition"
-          >
-            Add to Cart
-          </button>
+        <div className="mt-auto flex  justify-between gap-3">
+          <CartButton food={food}></CartButton>
 
           <Link
             href={`/foods/${id}`}
