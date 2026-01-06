@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import CartButton from "../buttons/CartButton";
+import Image from "next/image";
 
 export default function FoodCard({ food }) {
   //   console.log(food);
@@ -11,7 +12,13 @@ export default function FoodCard({ food }) {
     <div className="bg-white dark:bg-stone-900 rounded-2xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden flex flex-col">
       {/* Image */}
       <div className="relative">
-        <img src={foodImg} alt={title} className=" h-48 w-full p-2" />
+        <Image
+          src={foodImg}
+          alt={title}
+          className=" h-48 w-full p-2"
+          width={300}
+          height={150}
+        />
       </div>
 
       {/* Content */}

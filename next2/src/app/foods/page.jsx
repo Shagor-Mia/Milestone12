@@ -13,6 +13,12 @@ const getFoods = async (search) => {
   await new Promise((resolve) => setTimeout(resolve, 3000));
   return data.foods || [];
 };
+
+export const metadata = {
+  title: "All foods",
+  description: "all fast food",
+};
+
 const FoodPage = async ({ searchParams }) => {
   const { search = "" } = await searchParams;
   // console.log(search);

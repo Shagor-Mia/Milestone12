@@ -18,7 +18,7 @@ export default function ReviewCard({ reviews }) {
     <div className="bg-white dark:bg-stone-900 rounded-2xl shadow-md p-5 flex flex-col gap-4">
       {/* Header */}
       <div className="flex items-center gap-4">
-        <img
+        <Image
           src={photo}
           alt={user}
           width={48}
