@@ -49,6 +49,9 @@ export default function RootLayout({ children }) {
             <Link href={"/reviews"} className="btn">
               Review
             </Link>
+            <Link href={"/feedback"} className="btn">
+              Feedback
+            </Link>
           </div>
         </header>
         <CartProvider>{children}</CartProvider>

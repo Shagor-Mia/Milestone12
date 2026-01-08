@@ -59,5 +59,6 @@ export async function PATCH(request, { params }) {
   };
 
   const result = await feedbackCollection.updateOne(query, newData);
+
   return Response.json(result);
 }
