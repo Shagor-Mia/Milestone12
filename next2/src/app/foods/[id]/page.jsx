@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -28,15 +29,14 @@ export default async function Page({ params }) {
   const { id } = await params;
   const food = await getSingleFood(id);
 
-  if (!food) {
-    return (
-      <div className="text-center mt-20">
-        <h2 className="text-3xl font-bold">Food not found 😢</h2>
-        <Link href="/" className="text-emerald-600 underline mt-4 block">
-          Go back
-        </Link>
-      </div>
-    );
+  if (!food.title) {
+    return redirect("/foods");
+    // <div className="text-center mt-20">
+    //   <h2 className="text-3xl font-bold">Food not found 😢</h2>
+    //   <Link href="/foods" className="text-emerald-600 underline mt-4 block">
+    //     Go back
+    //   </Link>
+    // </div>
   }
 
   const { title, foodImg, price, category, area, video } = food;
