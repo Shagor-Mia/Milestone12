@@ -1,3 +1,4 @@
+import { feedback, getFeedback } from "@/actions/server/feedback";
 import FeedbackCard from "@/components/cards/FeedbackCard";
 import Link from "next/link";
 import React from "react";
@@ -6,16 +7,17 @@ export const metadata = {
   title: "feedbacks",
 };
 
-const getFeedback = async () => {
-  const res = await fetch("http://localhost:3000/api/feedback/", {
-    cache: "force-cache",
-    next: { revalidate: 60 },
-  });
-  return await res.json();
-};
+// const getFeedback = async () => {
+//   const res = await fetch("http://localhost:3000/api/feedback/", {
+//     cache: "force-cache",
+//     next: { revalidate: 60 },
+//   });
+//   return await res.json();
+// };
 const FeedbackPage = async () => {
-  const feedback = await getFeedback();
+  // const feedback = await getFeedback();
   // console.log(feedback);
+  const feedback = await getFeedback();
   return (
     <div>
       <div className="p-5">
