@@ -2,6 +2,8 @@ import { dbConnection } from "@/lib/dbConnect";
 import bcrypt from "bcryptjs";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+import GitHubProvider from "next-auth/providers/github";
 
 const userList = [
   { name: "ali", password: "123" },
@@ -39,11 +41,51 @@ export const authOptions = {
         return null;
       },
     }),
+    // google Oauth
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
+    // github
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+    }),
     // ...add more providers here
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      return true;
+      try {
+        console.log("user credential", {
+          user,
+          account,
+          profile,
+          email,
+          credentials,
+        });
+        const payload = {
+          ...user,
+          provider: account.provider,
+          providerId: account.providerAccountId,
+          role: "user",
+          createdAt: new Date().toISOString(),
+        };
+        if (!user?.email) {
+          return false;
+        }
+        const isExist = await dbConnection("users").findOne({
+          email: user.email,
+        });
+        if (isExist) {
+          console.log("user already exists");
+        }
+        if (!isExist) {
+          const result = await dbConnection("users").insertOne(payload);
+        }
+        return true;
+      } catch (error) {
+        return false;
+      }
     },
     // async redirect({ url, baseUrl }) {
     //   return baseUrl;
